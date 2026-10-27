@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Floating Stack — Walmart AI Lens Prototype</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Walmart AI Lens — Concept Prototypes</div>
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    All concepts
+  </a>
+</div>
+
+<div class="proto-head">
+  <div class="proto-title">
+    <h1>1 · Floating Stack</h1>
+    <span class="badge">Near-fullscreen scan</span>
+  </div>
+  <p class="proto-desc">Near-fullscreen camera for an immersive scan. A single swipeable "top match" card floats above the viewfinder as the top of a stack — swipe through alternates or pull up for the full result grid. Minimal chrome, maximum live preview.</p>
+</div>
+
+<div class="stage">
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-screen">
+
+        <!-- STEP 1 — Entry: Home -->
+        <div class="screen" id="s-home">
+          <div class="canvas home-canvas" style="overflow:hidden;">
+            <!-- replicates Figma node 40:730 exactly: the real app screenshot,
+                 sliced into the same three crops, with the camera banner and
+                 AI-lens badge composited in at the same positions. -->
+            <div style="position:absolute; left:0; top:0; width:402px; height:204.134px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:0; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div class="home-banner" data-advance title="Tap the banner to start" style="left:14.33px; right:14.33px; top:220.13px; height:80.68px; padding:0; border-radius:14.33px;">
+              <img src="assets/thumbs/camera-banner.png" alt="Snap a photo to shop it — find the same or similar items instantly" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div style="position:absolute; left:16px; top:316.81px; width:369px; height:119px; overflow:hidden; border-radius:12px;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-21.15px; top:-232.84px; width:409.59px; height:896.55px; display:block; max-width:none;">
+            </div>
+            <div style="position:absolute; left:0; top:451.81px; width:402px; height:422px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:-452.72px; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div data-advance title="Tap the AI lens icon to start" style="position:absolute; left:283.82px; top:68.94px; width:27.76px; height:27.76px; cursor:pointer;">
+              <div class="pulse-ring" style="inset:-8px; border-color:rgba(255,255,255,0.85);"></div>
+              <img src="assets/figma/icons/ai-lens.svg" alt="AI Lens" style="width:100%; height:100%; display:block;">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 — Button selected: opening camera -->
+        <div class="screen" id="s-opening">
+          <div class="canvas">
+            <div class="opening-scene">
+              <div class="opening-badge"><img src="assets/figma/icons/ai-lens.svg" alt="" style="width:44px;height:44px;"></div>
+              <div class="opening-text">Opening camera…</div>
+              <div class="opening-bar"><div class="opening-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 — Camera active: Floating Stack scan -->
+        <div class="screen" id="s-camera">
+          <div class="canvas">
+            <div class="scene-photo focus-flicker">
+              <img src="assets/figma/photos/fs-table.png" alt="" style="left:-212px;top:-438px;width:802px;height:1436px;">
+            </div>
+            <div class="camera-live-fx"></div>
+            <div class="live-indicator"><span class="rec"></span><span>LIVE</span></div>
+            <div class="top-fade" style="z-index:3;"></div>
+            <div class="statusbar" style="z-index:4;"><span>4:15</span><span>80%</span></div>
+            <div class="header-row" style="z-index:4;">
+              <div class="hdr-chip"><img src="assets/figma/icons/arrow-left.svg" alt="" style="width:23px;height:23px;"></div>
+              <div style="flex:1;margin:0 10px;background:rgba(255,255,255,0.92);border-radius:22px;height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;">
+                <img src="assets/figma/icons/magnifying-glass.svg" alt="" style="width:20px;height:20px;">
+                <span style="color:#767676;font-size:13px;font-weight:600;">Refine your search</span>
+              </div>
+              <div class="hdr-chip"><img src="assets/figma/icons/lightning.svg" alt="" style="width:22px;height:22px;"></div>
+            </div>
+
+            <div style="position:absolute; left:73px; top:180px; width:256px; height:186px; z-index:4;">
+              <div class="bracket tl"></div>
+              <div class="bracket tr"></div>
+              <div class="bracket bl"></div>
+              <div class="bracket br"></div>
+              <div class="toast-chip fs-scan-tag" style="left:50%; top:221px; transform:translateX(-50%);">Scanning…</div>
+            </div>
+
+            <div class="bottom-fade" style="z-index:3;"></div>
+
+            <div class="fade-in-up fs-match" data-advance style="position:absolute; left:20px; right:20px; bottom:299px; text-align:center; animation-delay:1.1s; cursor:pointer; z-index:5;">
+              <span style="font-size:11px; color:#fff; font-weight:700; opacity:0.95; letter-spacing:0.01em;">▲ Swipe up for all results</span>
+            </div>
+            <div id="fsStack" class="card-stack fade-in-up fs-match" data-advance style="left:20px; right:20px; bottom:185px; cursor:pointer; animation-delay:1.3s; z-index:5;">
+              <div class="ghost g3"></div>
+              <div class="ghost g2"></div>
+              <div class="ghost g1"></div>
+              <div id="fsCardBody" class="match-card">
+                <div class="match-thumb" style="width:58px; height:58px; position:relative; overflow:visible;">
+                  <img id="fsThumb" src="assets/figma/photos/fs-earbuds-thumb.png" alt="" style="display:block; width:100%; height:100%; object-fit:cover; border-radius:inherit;">
+                  <span id="fsBadge" style="position:absolute; top:-5px; left:-5px; background:#ffc220; color:#041f41; font-size:9px; font-weight:900; padding:3px 6px; border-radius:6px; white-space:nowrap; z-index:1;">Best seller</span>
+                </div>
+                <div style="flex:1; position:relative;">
+                  <p id="fsTitle" class="match-title" style="font-size:12.5px;">Soundcore Anker Wireless<br>Earbuds Pro, Black</p>
+                  <div style="display:flex; align-items:center; justify-content:space-between; margin-top:6px;">
+                    <div>
+                      <p id="fsPrice" class="match-price" style="font-size:17px;">$49.99</p>
+                      <span id="fsMatches" style="font-size:10.5px; color:#0071dc; font-weight:800;">View 384 matches ›</span>
+                    </div>
+                    <div style="background:#ffc220;color:#041f41;font-size:11px;font-weight:800;padding:7px 14px;border-radius:16px;">Add</div>
+                  </div>
+                </div>
+              </div>
+              <div style="position:absolute; left:50%; top:150px; transform:translateX(-50%); display:flex; gap:5px; z-index:6;">
+                <span class="fs-dot wide"></span>
+                <span class="fs-dot"></span>
+                <span class="fs-dot"></span>
+                <span class="fs-dot"></span>
+              </div>
+            </div>
+
+            <div class="shutter-row" style="z-index:5; --mode-delay:0.8s;">
+              <div class="ring-btn"><img src="assets/figma/icons/camera.svg" alt="" style="width:24px;height:24px;"></div>
+              <div class="shutter"></div>
+              <div class="ring-btn mode-btn"><img src="assets/figma/icons/cards-three.svg" alt="" style="width:24px;height:24px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 — Search results -->
+        <div class="screen" id="s-results">
+          <div class="canvas results-canvas">
+            <div class="results-head">
+              <div style="display:flex;align-items:center;gap:10px;">
+                <div class="hdr-chip" style="background:#f0f2f5;"><svg style="width:22px;height:22px;color:#041f41;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg></div>
+                <div style="flex:1;background:#f0f2f5;border-radius:20px;height:38px;display:flex;align-items:center;gap:8px;padding:0 14px;">
+                  <svg style="width:17px;height:17px;color:#767676;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <span style="color:#1c1c1c;font-size:13px;font-weight:700;">wireless earbuds case</span>
+                </div>
+              </div>
+              <p class="results-count">1,248 results — matched from your photo</p>
+            </div>
+            <div class="results-grid">
+              <div class="rcard hero">
+                <div class="img" style="overflow:hidden;"><img src="assets/figma/photos/fs-earbuds-thumb.png" alt="" style="width:100%;height:100%;object-fit:cover;"></div>
+                <div>
+                  <p class="nm" style="height:auto;">Soundcore Anker Wireless Earbuds Pro, Black</p>
+                  <p class="pr">$49.99</p>
+                  <p class="meta">★ 4.7 · Best seller · From your scan</p>
+                </div>
+              </div>
+              <div class="rcard"><div class="img" style="overflow:hidden;"><img src="assets/products/case-blue.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div><p class="nm">Soundcore Anker Case, Blue</p><p class="pr">$59.99</p><p class="meta">★ 4.6 (465)</p></div>
+              <div class="rcard"><div class="img" style="overflow:hidden;"><img src="assets/products/case-orange.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div><p class="nm">Soundcore Anker Case, Orange</p><p class="pr">$39.99</p><p class="meta">★ 4.3 (149)</p></div>
+              <div class="rcard"><div class="img" style="overflow:hidden;"><img src="assets/products/case-leather.webp" alt="" style="width:100%;height:100%;object-fit:contain;"></div><p class="nm">Leather Protective Case, Brown</p><p class="pr">$24.99</p><p class="meta">★ 4.7 (203)</p></div>
+              <div class="rcard"><div class="img" style="overflow:hidden;"><img src="assets/products/case-black.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div><p class="nm">Rugged Silicone Case, Black</p><p class="pr">$15.99</p><p class="meta">★ 4.4 (97)</p></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <div class="proto-controls">
+      <div class="steps"></div>
+      <div class="step-label"></div>
+      <div class="controls-row">
+        <button id="playBtn" class="btn btn-play"></button>
+        <button id="replayBtn" class="btn btn-ghost">↺ Replay</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flow-list"></div>
+  </div>
+</div>
+
+<script src="assets/proto.js"></script>
+<script>
+  // the three real match-card variants from Figma (39:562, 41:890, 43:964) —
+  // cycle through them while the camera-active step is showing, so the
+  // stack reads as genuinely swipeable alternates, with the dot indicator
+  // (position out of 4) moving to match each one.
+  var FS_CARDS = [
+    { badge:"Best seller", thumb:"assets/figma/photos/fs-earbuds-thumb.png",        title:"Soundcore Anker Wireless<br>Earbuds Pro, Black",  price:"$49.99", matches:"View 384 matches ›", dot:0 },
+    { badge:"New",         thumb:"assets/figma/photos/fs-earbuds-thumb-blue.png",   title:"Soundcore Anker Wireless<br>Earbuds Pro, Blue",   price:"$59.99", matches:"View 465 matches ›", dot:1 },
+    { badge:"Cheapest",    thumb:"assets/figma/photos/fs-earbuds-thumb-orange.png", title:"Soundcore Anker Wireless<br>Earbuds Pro, Orange", price:"$39.99", matches:"View 149 matches ›", dot:3 }
+  ];
+  var fsIdx = 0, fsTimer = null, fsAnimTimer = null;
+  function fsApply(c){
+    document.getElementById("fsBadge").textContent = c.badge;
+    document.getElementById("fsThumb").src = c.thumb;
+    document.getElementById("fsTitle").innerHTML = c.title;
+    document.getElementById("fsPrice").textContent = c.price;
+    document.getElementById("fsMatches").textContent = c.matches;
+    var dots = document.querySelectorAll(".fs-dot");
+    dots.forEach(function(d, idx){ d.classList.toggle("wide", idx === c.dot); });
+  }
+  // front card quickly fades out while zooming up and away; the two ghost
+  // layers behind it each step forward one slot — then, right as that
+  // settles, the (now-reset) front card's content swaps to the next match.
+  function fsAdvance(){
+    var wrap = document.getElementById("fsStack");
+    if(!wrap) return;
+    wrap.classList.add("stack-advancing");
+    fsAnimTimer = setTimeout(function(){
+      wrap.classList.remove("stack-advancing");
+      fsIdx = (fsIdx + 1) % FS_CARDS.length;
+      fsApply(FS_CARDS[fsIdx]);
+    }, 300);
+  }
+  function fsStart(){
+    fsStop();
+    fsIdx = 0;
+    fsApply(FS_CARDS[0]);
+    fsTimer = setInterval(fsAdvance, 1900);
+  }
+  function fsStop(){
+    if(fsTimer){ clearInterval(fsTimer); fsTimer = null; }
+    if(fsAnimTimer){ clearTimeout(fsAnimTimer); fsAnimTimer = null; }
+    var wrap = document.getElementById("fsStack");
+    if(wrap){ wrap.classList.remove("stack-advancing"); }
+  }
+  window.__wmOnStep = function(index){
+    if(index === 2){ fsStart(); } else { fsStop(); }
+  };
+
+  WMProto.init([
+    { id:"s-home",    label:"Entry — Home screen",         desc:"Tap the AI lens badge in the search bar, or the “Snap a photo to shop it” banner — both launch the same camera.", duration:2800 },
+    { id:"s-opening", label:"Button selected — opening",    desc:"A quick permission + camera-warm-up transition confirms the tap and sets expectation before the live view appears.", duration:1300 },
+    { id:"s-camera",  label:"Camera active — scanning",     desc:"Live viewfinder. Corner brackets pulse while scanning, then a stacked deck of match cards floats in above the feed, cycling through alternates as the dot indicator below it advances.", duration:7600 },
+    { id:"s-results", label:"Full search results",          desc:"Swiping up (or tapping the stack) expands into the standard Walmart results grid, seeded with the scanned match pinned to the top.", duration:5200 }
+  ]);
+</script>
+</body>
+</html>

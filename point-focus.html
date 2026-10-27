@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Point Focus — Walmart AI Lens Prototype</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Walmart AI Lens — Concept Prototypes</div>
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    All concepts
+  </a>
+</div>
+
+<div class="proto-head">
+  <div class="proto-title">
+    <h1>2 · Point Focus</h1>
+    <span class="badge">Tap-anywhere targeting</span>
+  </div>
+  <p class="proto-desc">Replaces the fixed center reticle with tap-anywhere targeting. A loupe magnifies the exact spot under your finger before committing, so you can pinpoint one item in a cluttered scene — then a single result toast appears right at that point.</p>
+</div>
+
+<div class="stage">
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-screen">
+
+        <!-- STEP 1 — Entry: Home -->
+        <div class="screen" id="s-home">
+          <div class="canvas home-canvas" style="overflow:hidden;">
+            <!-- replicates Figma node 40:730 exactly: the real app screenshot,
+                 sliced into the same three crops, with the camera banner and
+                 AI-lens badge composited in at the same positions. -->
+            <div style="position:absolute; left:0; top:0; width:402px; height:204.134px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:0; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div class="home-banner" data-advance title="Tap the banner to start" style="left:14.33px; right:14.33px; top:220.13px; height:80.68px; padding:0; border-radius:14.33px;">
+              <img src="assets/thumbs/camera-banner.png" alt="Snap a photo to shop it — find the same or similar items instantly" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div style="position:absolute; left:16px; top:316.81px; width:369px; height:119px; overflow:hidden; border-radius:12px;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-21.15px; top:-232.84px; width:409.59px; height:896.55px; display:block; max-width:none;">
+            </div>
+            <div style="position:absolute; left:0; top:451.81px; width:402px; height:422px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:-452.72px; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div data-advance title="Tap the AI lens icon to start" style="position:absolute; left:283.82px; top:68.94px; width:27.76px; height:27.76px; cursor:pointer;">
+              <div class="pulse-ring" style="inset:-8px; border-color:rgba(255,255,255,0.85);"></div>
+              <img src="assets/figma/icons/ai-lens.svg" alt="AI Lens" style="width:100%; height:100%; display:block;">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 — Button selected: opening camera -->
+        <div class="screen" id="s-opening">
+          <div class="canvas">
+            <div class="opening-scene">
+              <div class="opening-badge"><img src="assets/figma/icons/ai-lens.svg" alt="" style="width:44px;height:44px;"></div>
+              <div class="opening-text">Opening camera…</div>
+              <div class="opening-bar"><div class="opening-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 — Camera active: Point Focus -->
+        <div class="screen" id="s-camera">
+          <div class="canvas">
+            <div class="scene-photo focus-flicker">
+              <img src="assets/figma/photos/pf-table.png" alt="" style="left:0;top:0;width:402px;height:874px;">
+            </div>
+            <div class="camera-live-fx"></div>
+            <div class="live-indicator"><span class="rec"></span><span>LIVE</span></div>
+            <div class="statusbar" style="z-index:4;"><span>4:19</span><span>80%</span></div>
+            <div class="header-row" style="z-index:4;">
+              <div class="hdr-chip"><img src="assets/figma/icons/arrow-left.svg" alt="" style="width:23px;height:23px;"></div>
+              <div style="flex:1;"></div>
+              <div class="hdr-chip"><img src="assets/figma/icons/lightning.svg" alt="" style="width:22px;height:22px;"></div>
+            </div>
+            <div style="position:absolute; left:16px; right:16px; top:106px; display:flex; justify-content:center; z-index:4;">
+              <div style="background:rgba(4,31,65,0.55); padding:8px 16px; border-radius:18px;">
+                <span style="color:#fff; font-size:12px; font-weight:700;">Tap anywhere to search that item</span>
+              </div>
+            </div>
+
+            <!-- tap target + loupe — only appear once the crosshair mode has activated -->
+            <div class="fade-in-up pf-target" style="position:absolute; left:216px; top:304px; width:92px; height:92px; border-radius:46px; border:1.5px solid rgba(255,194,32,0.6); z-index:4; animation-delay:1.05s;"></div>
+            <div class="fade-in-up pf-target" style="position:absolute; left:230px; top:318px; width:64px; height:64px; border-radius:32px; border:2.5px solid #ffc220; z-index:4; animation-delay:1.05s;">
+              <div style="position:absolute; left:29px; top:-14px; width:2px; height:10px; background:#ffc220;"></div>
+              <div style="position:absolute; left:-14px; top:29px; width:10px; height:2px; background:#ffc220;"></div>
+            </div>
+            <div class="fade-in-up pf-target" style="position:absolute; left:172px; top:170px; width:180px; height:180px; border-radius:90px; border:7.2px solid #fff; overflow:hidden; box-shadow:0 14px 36px rgba(0,0,0,0.4); z-index:4; animation-delay:1.05s;">
+              <img src="assets/figma/photos/pf-table.png" alt="" style="position:absolute; left:-324px; top:-534px; width:677px; height:1473px; display:block; max-width:none; filter:brightness(1.05) contrast(1.05);">
+            </div>
+            <div class="toast-chip fade-in-up pf-target" style="left:168px; top:462px; z-index:4; animation-delay:1.5s;">Searching this spot…</div>
+
+            <div class="bottom-fade" style="z-index:3;"></div>
+            <div class="fade-in-up pf-target" data-advance style="position:absolute; left:150px; top:499px; width:181px; z-index:5; cursor:pointer; animation-delay:2s;">
+              <div style="background:#fff; border-radius:20px; box-shadow:0 11px 14px rgba(0,0,0,0.4); display:flex; gap:11px; align-items:center; padding:11px;">
+                <div class="match-thumb" style="width:58px;height:58px;"><img src="assets/figma/photos/pf-earbuds-thumb.png" alt=""></div>
+                <div>
+                  <p class="match-title" style="font-size:13px;">Earbuds Case</p>
+                  <p class="match-price" style="font-size:18px; margin-top:2px;">$49.99</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="shutter-row" style="z-index:5; --mode-delay:0.8s;">
+              <div class="ring-btn"><img src="assets/figma/icons/camera.svg" alt="" style="width:24px;height:24px;"></div>
+              <div class="shutter"></div>
+              <div class="ring-btn mode-btn"><img src="assets/figma/icons/crosshair.svg" alt="" style="width:24px;height:24px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 — PDP -->
+        <div class="screen" id="s-pdp">
+          <div class="canvas pdp-canvas">
+            <div class="pdp-hero" style="background:linear-gradient(160deg,#1a1a1a,#3d3d3d);">
+              <img src="assets/figma/photos/pf-earbuds-thumb.png" alt="" style="width:240px;height:240px;object-fit:cover;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,0.35);">
+              <div class="pdp-dots"><span class="on"></span><span></span><span></span></div>
+            </div>
+            <div class="pdp-scan-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.5-2h7L17 8h3a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13" r="3.5"/></svg>
+              Matched from your scan
+            </div>
+            <div class="pdp-top-icons">
+              <div class="hdr-chip"><img src="assets/figma/icons/arrow-left.svg" alt="" style="width:20px;height:20px;filter:invert(1) brightness(0.2);"></div>
+              <div class="hdr-chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg></div>
+            </div>
+            <div class="pdp-body">
+              <p class="pdp-brand">Soundcore by Anker</p>
+              <h2 class="pdp-title">Anker Soundcore Wireless Earbuds Charging Case, Black</h2>
+              <div class="pdp-stars">
+                <span class="s"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14l-5-4.87 6.91-1.01z"/></svg></span>
+                <span class="ct">4.7 (2,140)</span>
+              </div>
+              <p class="pdp-price">$49.99</p>
+              <p class="pdp-ship">✓ Free shipping, arrives tomorrow</p>
+              <div class="pdp-swatches">
+                <div class="pdp-swatch sel" style="background:#fff; overflow:hidden;"><img src="assets/products/case-black.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                <div class="pdp-swatch" style="background:#fff; overflow:hidden;"><img src="assets/products/case-leather.webp" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                <div class="pdp-swatch" style="background:#fff; overflow:hidden;"><img src="assets/products/case-blue.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                <div class="pdp-swatch" style="background:#fff; overflow:hidden;"><img src="assets/products/case-orange.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+              </div>
+            </div>
+            <div class="pdp-actions">
+              <div class="buy">Buy now</div>
+              <div class="add">Add to cart</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <div class="proto-controls">
+      <div class="steps"></div>
+      <div class="step-label"></div>
+      <div class="controls-row">
+        <button id="playBtn" class="btn btn-play"></button>
+        <button id="replayBtn" class="btn btn-ghost">↺ Replay</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flow-list"></div>
+  </div>
+</div>
+
+<script src="assets/proto.js"></script>
+<script>
+  WMProto.init([
+    { id:"s-home",    label:"Entry — Home screen",         desc:"Tap the AI lens badge in the search bar, or the “Snap a photo to shop it” banner — both launch the same camera.", duration:2800 },
+    { id:"s-opening", label:"Button selected — opening",    desc:"A quick permission + camera-warm-up transition confirms the tap and sets expectation before the live view appears.", duration:1300 },
+    { id:"s-camera",  label:"Camera active — tap to focus", desc:"Live viewfinder with no fixed reticle. Tapping a spot drops a loupe + crosshair right there, and a single matching result toasts in at that exact point.", duration:4200 },
+    { id:"s-pdp",     label:"Product detail page",          desc:"Tapping the toast opens the matched product's PDP directly — no intermediate results list needed for a single confident match.", duration:5200 }
+  ]);
+</script>
+</body>
+</html>

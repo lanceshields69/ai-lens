@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Circle &amp; Search — Walmart AI Lens Prototype</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .lasso-path{
+    stroke-dasharray:100; stroke-dashoffset:100;
+  }
+  .screen.active .lasso-path{animation:drawLasso 1.3s ease-out forwards; animation-delay:1s;}
+  @keyframes drawLasso{to{stroke-dashoffset:0;}}
+  /* fingertip indicator — travels the lasso path as it's drawn, then
+     lifts away (fades) once the gesture completes */
+  .lasso-finger{
+    position:absolute; top:0; left:0; z-index:4;
+    width:14px; height:14px; margin:-7px 0 0 -7px; border-radius:50%;
+    background:rgba(255,255,255,0.95);
+    box-shadow:0 0 0 7px rgba(255,255,255,0.22), 0 2px 6px rgba(0,0,0,0.3);
+    opacity:0;
+    offset-path: path('M231 379 C 272 377, 306 403, 306 435 C 306 465, 272 488, 229 488 C 188 488, 156 463, 156 431 C 156 401, 190 380, 231 379 Z');
+    offset-distance:0%;
+  }
+  .screen.active .lasso-finger{
+    animation:fingerTravel 1.3s linear forwards, fingerVisible 1.3s ease forwards;
+    animation-delay:1s;
+  }
+  @keyframes fingerTravel{to{offset-distance:100%;}}
+  @keyframes fingerVisible{
+    0%{opacity:0;} 8%{opacity:1;} 82%{opacity:1;} 100%{opacity:0;}
+  }
+  .sheet-reveal{transform:translateY(100%);}
+  .screen.active .sheet-reveal{animation:sheetUp .6s var(--ease) forwards; animation-delay:0.3s;}
+  @keyframes sheetUp{to{transform:translateY(0);}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Walmart AI Lens — Concept Prototypes</div>
+  <a href="index.html" class="back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+    All concepts
+  </a>
+</div>
+
+<div class="proto-head">
+  <div class="proto-title">
+    <h1>4 · Circle &amp; Search</h1>
+    <span class="badge">Freehand lasso + keyword</span>
+  </div>
+  <p class="proto-desc">Freehand lasso selection replaces the fixed reticle for precise, user-drawn targeting. Combine the circled item with a typed keyword (e.g. "blue") to refine results live, shown in a strip before committing to search.</p>
+</div>
+
+<div class="stage">
+  <div class="phone-wrap">
+    <div class="phone">
+      <div class="notch"></div>
+      <div class="phone-screen">
+
+        <!-- STEP 1 — Entry: Home -->
+        <div class="screen" id="s-home">
+          <div class="canvas home-canvas" style="overflow:hidden;">
+            <!-- replicates Figma node 40:730 exactly: the real app screenshot,
+                 sliced into the same three crops, with the camera banner and
+                 AI-lens badge composited in at the same positions. -->
+            <div style="position:absolute; left:0; top:0; width:402px; height:204.134px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:0; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div class="home-banner" data-advance title="Tap the banner to start" style="left:14.33px; right:14.33px; top:220.13px; height:80.68px; padding:0; border-radius:14.33px;">
+              <img src="assets/thumbs/camera-banner.png" alt="Snap a photo to shop it — find the same or similar items instantly" style="width:100%;height:100%;object-fit:cover;display:block;">
+            </div>
+            <div style="position:absolute; left:16px; top:316.81px; width:369px; height:119px; overflow:hidden; border-radius:12px;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-21.15px; top:-232.84px; width:409.59px; height:896.55px; display:block; max-width:none;">
+            </div>
+            <div style="position:absolute; left:0; top:451.81px; width:402px; height:422px; overflow:hidden;">
+              <img src="assets/figma/photos/home-banner-bg.png" alt="" style="position:absolute; left:-0.16px; top:-452.72px; width:402.32px; height:874.63px; display:block; max-width:none;">
+            </div>
+            <div data-advance title="Tap the AI lens icon to start" style="position:absolute; left:283.82px; top:68.94px; width:27.76px; height:27.76px; cursor:pointer;">
+              <div class="pulse-ring" style="inset:-8px; border-color:rgba(255,255,255,0.85);"></div>
+              <img src="assets/figma/icons/ai-lens.svg" alt="AI Lens" style="width:100%; height:100%; display:block;">
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2 — Button selected: opening camera -->
+        <div class="screen" id="s-opening">
+          <div class="canvas">
+            <div class="opening-scene">
+              <div class="opening-badge"><img src="assets/figma/icons/ai-lens.svg" alt="" style="width:44px;height:44px;"></div>
+              <div class="opening-text">Opening camera…</div>
+              <div class="opening-bar"><div class="opening-bar-fill"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 3 — Camera active: draw a circle -->
+        <div class="screen" id="s-camera">
+          <div class="canvas" style="background:linear-gradient(141deg,#4a3f35,#6b5a47 37%,#8a7560 58%,#5c4d3e 91%);">
+            <div class="scene-photo focus-flicker">
+              <img src="assets/figma/photos/cs-table.png" alt="" style="left:-45px;top:-9px;width:493px;height:883px;">
+            </div>
+            <div class="camera-live-fx"></div>
+            <div class="live-indicator"><span class="rec"></span><span>LIVE</span></div>
+            <div class="top-fade" style="z-index:3;"></div>
+            <div class="statusbar" style="z-index:4;"><span>4:17</span><span>80%</span></div>
+            <div class="header-row" style="z-index:4;">
+              <div class="hdr-chip"><img src="assets/figma/icons/arrow-left.svg" alt="" style="width:23px;height:23px;"></div>
+              <div class="hdr-title">Circle &amp; Search</div>
+              <div class="hdr-chip"><img src="assets/figma/icons/lightning.svg" alt="" style="width:22px;height:22px;"></div>
+            </div>
+
+            <!-- the hand-drawn lasso: a single CLOSED loop whose stroke draws on
+                 over ~1.3s (reads as "in progress" mid-animation), settling into
+                 a fully-closed circle once the gesture completes. -->
+            <svg width="402" height="874" viewBox="0 0 402 874" style="position:absolute; inset:0; z-index:4;">
+              <path class="lasso-path" pathLength="100" d="M231 379 C 272 377, 306 403, 306 435 C 306 465, 272 488, 229 488 C 188 488, 156 463, 156 431 C 156 401, 190 380, 231 379 Z" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke="white" fill="none"/>
+            </svg>
+            <div class="lasso-finger"></div>
+
+            <div class="toast-chip fade-in-up cs-tag" data-advance style="left:150px; top:508px; z-index:5; animation-delay:2.3s; cursor:pointer;">Circled — tap to refine ›</div>
+
+            <div class="shutter-row" style="z-index:5; --mode-delay:0.8s;">
+              <div class="ring-btn"><img src="assets/figma/icons/camera.svg" alt="" style="width:24px;height:24px;"></div>
+              <div class="shutter"></div>
+              <div class="ring-btn mode-btn"><img src="assets/figma/icons/pencil-simple.svg" alt="" style="width:24px;height:24px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 4 — Refine + results sheet (same live scene as step 3,
+             the sheet simply slides up over the bottom portion of it —
+             no separate/shorter photo crop, so nothing exposes a gap). -->
+        <div class="screen" id="s-refine">
+          <div class="canvas">
+            <div class="scene-photo">
+              <img src="assets/figma/photos/cs-table.png" alt="" style="left:-45px;top:-9px;width:493px;height:883px;">
+            </div>
+            <div class="top-fade" style="z-index:3;"></div>
+            <div class="statusbar" style="z-index:4;"><span>4:17</span><span>80%</span></div>
+            <div class="header-row" style="z-index:4;">
+              <div class="hdr-chip"><img src="assets/figma/icons/arrow-left.svg" alt="" style="width:23px;height:23px;"></div>
+              <div class="hdr-title">Circle &amp; Search</div>
+              <div class="hdr-chip"><img src="assets/figma/icons/lightning.svg" alt="" style="width:22px;height:22px;"></div>
+            </div>
+            <!-- the circled selection persists from step 3 -->
+            <svg width="402" height="874" viewBox="0 0 402 874" style="position:absolute; inset:0; z-index:4;">
+              <path d="M231 379 C 272 377, 306 403, 306 435 C 306 465, 272 488, 229 488 C 188 488, 156 463, 156 431 C 156 401, 190 380, 231 379 Z" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" stroke="white" fill="none"/>
+            </svg>
+
+            <div class="sheet-reveal" style="position:absolute; left:0; right:0; top:506px; bottom:0; background:#fff; border-radius:24px 24px 0 0; box-shadow:0 -8px 30px rgba(0,0,0,0.3); padding-top:10px; z-index:5;">
+              <div class="sheet-handle"></div>
+              <div style="padding:14px 20px 0;">
+                <h3 style="margin:0 0 6px; font-size:19px; font-weight:800; color:var(--wm-blue-dark); letter-spacing:-0.02em;">Get specific</h3>
+                <p style="margin:0 0 16px; font-size:13px; color:#767676;">Circle an item, then add a word to narrow your results.</p>
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+                  <div style="width:52px;height:52px;border-radius:12px;border:2px solid #0071dc;overflow:hidden;background:#1a1a1a;">
+                    <img src="assets/figma/photos/cs-table.png" alt="" style="width:100%;height:100%;object-fit:cover; object-position:48% 42%;">
+                  </div>
+                  <span style="color:#767676; font-size:20px; font-weight:700;">+</span>
+                  <div style="flex:1; border:2px solid #041f41; border-radius:24px; height:44px; display:flex; align-items:center; padding:0 16px;">
+                    <span style="font-weight:800; color:#041f41; font-size:15px;">blue</span>
+                    <span style="width:2px;height:16px;background:#041f41;margin-left:3px;" class="shimmer"></span>
+                  </div>
+                  <span style="color:#767676; font-size:20px; font-weight:700;">=</span>
+                </div>
+                <div style="display:flex; gap:10px; margin-bottom:18px;">
+                  <div style="flex:1; text-align:center;">
+                    <div style="border:2px solid #0071dc; background:#fff; border-radius:12px; height:70px; display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="assets/products/case-blue.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                    <p style="margin:6px 0 0; font-size:12px; font-weight:800; color:#041f41;">$34.99</p>
+                  </div>
+                  <div style="flex:1; text-align:center;">
+                    <div style="border:2px solid #e5e5e5; background:#fff; border-radius:12px; height:70px; display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="assets/products/case-black.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                    <p style="margin:6px 0 0; font-size:12px; font-weight:800; color:#041f41;">$49.99</p>
+                  </div>
+                  <div style="flex:1; text-align:center;">
+                    <div style="border:2px solid #e5e5e5; background:#fff; border-radius:12px; height:70px; display:flex; align-items:center; justify-content:center; overflow:hidden;"><img src="assets/products/case-orange.jpg" alt="" style="width:100%;height:100%;object-fit:contain;"></div>
+                    <p style="margin:6px 0 0; font-size:12px; font-weight:800; color:#041f41;">$22.49</p>
+                  </div>
+                </div>
+              </div>
+              <div style="position:absolute; left:20px; right:20px; bottom:22px; display:flex; gap:10px;">
+                <div style="flex:1; border:2px solid #041f41; border-radius:26px; height:50px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#041f41; font-size:15px;">Retake</div>
+                <div style="flex:2; background:#0071dc; border-radius:26px; height:50px; display:flex; align-items:center; justify-content:center; font-weight:800; color:#fff; font-size:15px;">Search Walmart</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="home-indicator"></div>
+    </div>
+
+    <div class="proto-controls">
+      <div class="steps"></div>
+      <div class="step-label"></div>
+      <div class="controls-row">
+        <button id="playBtn" class="btn btn-play"></button>
+        <button id="replayBtn" class="btn btn-ghost">↺ Replay</button>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="flow-list"></div>
+  </div>
+</div>
+
+<script src="assets/proto.js"></script>
+<script>
+  WMProto.init([
+    { id:"s-home",    label:"Entry — Home screen",         desc:"Tap the AI lens badge in the search bar, or the “Snap a photo to shop it” banner — both launch the same camera.", duration:2800 },
+    { id:"s-opening", label:"Button selected — opening",    desc:"A quick permission + camera-warm-up transition confirms the tap and sets expectation before the live view appears.", duration:1300 },
+    { id:"s-camera",  label:"Camera active — draw a circle", desc:"No fixed reticle — the pencil mode activates, then you freehand-lasso exactly the item you mean, however it's oriented in frame.", duration:3200 },
+    { id:"s-refine",  label:"Refine + results",             desc:"The circled item anchors a keyword strip (“+ blue =”) with live thumbnail matches, before committing to a full Walmart search.", duration:5200 }
+  ]);
+</script>
+</body>
+</html>

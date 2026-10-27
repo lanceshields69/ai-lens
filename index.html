@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Walmart AI Lens — Concept Prototypes</title>
+<link rel="stylesheet" href="assets/fonts.css">
+<link rel="stylesheet" href="assets/styles.css">
+<style>
+  .card-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
+  .card-thumb .scrim{position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);}
+  .card-thumb .chip{
+    position:absolute; left:12px; top:12px;
+    background:rgba(4,31,65,0.7); color:#fff; font-size:11px; font-weight:800;
+    padding:5px 10px; border-radius:12px; letter-spacing:0.02em;
+  }
+  .card-thumb .pill{
+    position:absolute; left:12px; bottom:12px;
+    background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.35);
+    backdrop-filter:blur(4px);
+    color:#fff; font-size:11px; font-weight:700;
+    padding:5px 10px; border-radius:12px;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><span class="dot"></span> Walmart AI Lens</div>
+  <a href="https://www.figma.com/design/IVlj6X2QtenHdgdRnk3Vj7/Walmart-Design?node-id=40-782&m=dev" target="_blank" rel="noopener" class="back-btn">
+    View in Figma
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
+  </a>
+</div>
+
+<div class="index-hero">
+  <div class="eyebrow">● Concept prototypes — live demo</div>
+  <h1>Four ways to teach the app<br><span>to see what you see.</span></h1>
+  <p>Four interactive, clickable explorations of an AI visual-search entry point for the Walmart app — each one starting from the home screen, through activation, into the camera's core interaction, and out to a result. Click through by hand to demo live, or hit <strong>Play</strong> to run the whole sequence hands-free for recording.</p>
+</div>
+
+<div class="grid">
+
+  <div class="card">
+    <div class="glow" style="background:#0071dc;"></div>
+    <div class="card-top"><span class="card-num">01 / Near-fullscreen scan</span></div>
+    <div class="card-thumb">
+      <img src="assets/thumbs/floating-stack.png" alt="">
+      <div class="scrim"></div>
+      <div class="chip">Floating Stack</div>
+      <div class="pill">Entry → Opening → Scan → Results</div>
+    </div>
+    <h3>Floating Stack</h3>
+    <p>A single swipeable match card floats above the live feed as the top of a stacked deck — swipe for alternates, or pull up for the full result grid. Minimal chrome, maximum camera.</p>
+    <div class="card-actions">
+      <a class="btn btn-primary" href="floating-stack.html">Open prototype</a>
+      <a class="btn btn-play" href="floating-stack.html?autoplay=1">▶ Play</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="glow" style="background:#ffc220;"></div>
+    <div class="card-top"><span class="card-num">02 / Tap-anywhere targeting</span></div>
+    <div class="card-thumb">
+      <img src="assets/thumbs/point-focus.png" alt="">
+      <div class="scrim"></div>
+      <div class="chip">Point Focus</div>
+      <div class="pill">Entry → Opening → Tap to focus → PDP</div>
+    </div>
+    <h3>Point Focus</h3>
+    <p>No fixed center reticle — tap anywhere in frame and a loupe magnifies the exact spot before committing, so you can pinpoint one item in a cluttered scene with a single confident result.</p>
+    <div class="card-actions">
+      <a class="btn btn-primary" href="point-focus.html">Open prototype</a>
+      <a class="btn btn-play" href="point-focus.html?autoplay=1">▶ Play</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="glow" style="background:#4aa3f0;"></div>
+    <div class="card-top"><span class="card-num">03 / Pinned multi-item cards</span></div>
+    <div class="card-thumb">
+      <img src="assets/thumbs/constellation.png" alt="">
+      <div class="scrim"></div>
+      <div class="chip">Constellation</div>
+      <div class="pill">Entry → Opening → Pinned matches → PDP</div>
+    </div>
+    <h3>Constellation</h3>
+    <p>Inspired by Amazon Lens: matches never collapse into a sheet. Every detected object gets its own pinned card with a connector line straight into the live scene — compare in place.</p>
+    <div class="card-actions">
+      <a class="btn btn-primary" href="constellation.html">Open prototype</a>
+      <a class="btn btn-play" href="constellation.html?autoplay=1">▶ Play</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="glow" style="background:#8a7560;"></div>
+    <div class="card-top"><span class="card-num">04 / Freehand lasso + keyword</span></div>
+    <div class="card-thumb">
+      <img src="assets/thumbs/circle-search.png" alt="">
+      <div class="scrim"></div>
+      <div class="chip">Circle &amp; Search</div>
+      <div class="pill">Entry → Opening → Draw circle → Refine + results</div>
+    </div>
+    <h3>Circle &amp; Search</h3>
+    <p>Freehand lasso selection replaces the fixed reticle for precise, user-drawn targeting. Combine the circled item with a typed keyword to refine results live before committing to search.</p>
+    <div class="card-actions">
+      <a class="btn btn-primary" href="circle-search.html">Open prototype</a>
+      <a class="btn btn-play" href="circle-search.html?autoplay=1">▶ Play</a>
+    </div>
+  </div>
+
+</div>
+
+<p class="footer-note">Built from the polished Walmart Lens design file — real icons, photography and copy pulled directly from Figma. Each prototype is a self-contained, clickable HTML page: navigate by hand for a live demo, or use the Play link to auto-run the full sequence for screen recording. Use the back button inside any prototype to return here.</p>
+
+</body>
+</html>
