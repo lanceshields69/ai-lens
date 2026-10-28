@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="assets/fonts.css">
 <link rel="stylesheet" href="assets/styles.css">
 <style>
+  .card-thumb{display:block; cursor:pointer;}
   .card-thumb img{width:100%; height:100%; object-fit:cover; display:block;}
   .card-thumb .scrim{position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);}
   .card-thumb .chip{
@@ -44,12 +45,12 @@
   <div class="card">
     <div class="glow" style="background:#0071dc;"></div>
     <div class="card-top"><span class="card-num">01 / Near-fullscreen scan</span></div>
-    <div class="card-thumb">
+    <a class="card-thumb" href="floating-stack.html">
       <img src="assets/thumbs/floating-stack.png" alt="">
       <div class="scrim"></div>
       <div class="chip">Floating Stack</div>
       <div class="pill">Entry → Opening → Scan → Results</div>
-    </div>
+    </a>
     <h3>Floating Stack</h3>
     <p>A single swipeable match card floats above the live feed as the top of a stacked deck — swipe for alternates, or pull up for the full result grid. Minimal chrome, maximum camera.</p>
     <div class="card-actions">
@@ -61,12 +62,12 @@
   <div class="card">
     <div class="glow" style="background:#ffc220;"></div>
     <div class="card-top"><span class="card-num">02 / Tap-anywhere targeting</span></div>
-    <div class="card-thumb">
+    <a class="card-thumb" href="point-focus.html">
       <img src="assets/thumbs/point-focus.png" alt="">
       <div class="scrim"></div>
       <div class="chip">Point Focus</div>
       <div class="pill">Entry → Opening → Tap to focus → PDP</div>
-    </div>
+    </a>
     <h3>Point Focus</h3>
     <p>No fixed center reticle — tap anywhere in frame and a loupe magnifies the exact spot before committing, so you can pinpoint one item in a cluttered scene with a single confident result.</p>
     <div class="card-actions">
@@ -78,12 +79,12 @@
   <div class="card">
     <div class="glow" style="background:#4aa3f0;"></div>
     <div class="card-top"><span class="card-num">03 / Pinned multi-item cards</span></div>
-    <div class="card-thumb">
+    <a class="card-thumb" href="constellation.html">
       <img src="assets/thumbs/constellation.png" alt="">
       <div class="scrim"></div>
       <div class="chip">Constellation</div>
       <div class="pill">Entry → Opening → Pinned matches → PDP</div>
-    </div>
+    </a>
     <h3>Constellation</h3>
     <p>Inspired by Amazon Lens: matches never collapse into a sheet. Every detected object gets its own pinned card with a connector line straight into the live scene — compare in place.</p>
     <div class="card-actions">
@@ -95,12 +96,12 @@
   <div class="card">
     <div class="glow" style="background:#8a7560;"></div>
     <div class="card-top"><span class="card-num">04 / Freehand lasso + keyword</span></div>
-    <div class="card-thumb">
+    <a class="card-thumb" href="circle-search.html">
       <img src="assets/thumbs/circle-search.png" alt="">
       <div class="scrim"></div>
       <div class="chip">Circle &amp; Search</div>
       <div class="pill">Entry → Opening → Draw circle → Refine + results</div>
-    </div>
+    </a>
     <h3>Circle &amp; Search</h3>
     <p>Freehand lasso selection replaces the fixed reticle for precise, user-drawn targeting. Combine the circled item with a typed keyword to refine results live before committing to search.</p>
     <div class="card-actions">
